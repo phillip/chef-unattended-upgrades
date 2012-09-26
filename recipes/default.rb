@@ -21,6 +21,10 @@ package "unattended-upgrades" do
   action :install
 end
 
+package "mailutils" do
+  action :install
+end
+
 template "/etc/apt/apt.conf.d/10periodic" do
   source "10periodic.erb"
   mode "0644"
