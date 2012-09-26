@@ -21,6 +21,22 @@ package "unattended-upgrades" do
   action :install
 end
 
+template "/etc/apt/apt.conf.d/10periodic" do
+  source "10periodic.erb"
+  mode "0644"
+  owner "root"
+  group "root"
+  variables(:n => node["unattended_upgrades"])
+end
+
+template "/etc/apt/apt.conf.d/50unattended-upgrades" do
+  source "50unattended-upgrades.erb"
+  mode "0644"
+  owner "root"
+  group "root"
+  variables(:n => node["unattended_upgrades"])
+end
+
 execute "unattended-upgrade-periodic" do
   command "unattended-upgrade"
   ignore_failure true
