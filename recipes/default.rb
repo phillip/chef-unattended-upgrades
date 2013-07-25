@@ -47,6 +47,5 @@ execute "unattended-upgrade-periodic" do
   only_if do
     File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
     File.mtime('/var/lib/apt/periodic/update-success-stamp') > Time.now - node['unattended_upgrades']['max_seconds_after_aptget_update'].to_i
-	puts n[:wait_interval]
   end
 end
