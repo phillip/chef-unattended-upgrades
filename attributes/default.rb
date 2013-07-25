@@ -13,3 +13,5 @@ n[:mail_only_on_error] = false
 n[:remove_unused_dependencies] = true
 n[:automatic_reboot] = false
 n[:download_limit] = nil
+n[:wait_interval] = nil
+n[:max_seconds_after_aptget_update] = 180
