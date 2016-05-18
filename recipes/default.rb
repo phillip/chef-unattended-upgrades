@@ -18,7 +18,7 @@
 #
 
 package "unattended-upgrades" do
-  action :install
+  action :upgrade
 end
 
 package "mailutils" do
