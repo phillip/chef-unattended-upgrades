@@ -16,9 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-package "unattended-upgrades" do
-  action :upgrade
+if node[:platform_family] == "debian"
+  apt_package "unattended-upgrades" do
+    action :upgrade
+    options '-o Dpkg::Options::="--force-confnew"'
+  end
+else
+  package "unattended-upgrades" do
+    action :upgrade
+  end
 end
 
 package "mailutils" do
