@@ -14,3 +14,4 @@ n[:remove_unused_dependencies] = true
 n[:automatic_reboot] = false
 n[:download_limit] = nil
 n[:max_seconds_after_aptget_update] = 180
+n[:always_run_unattended_on_exec] = false

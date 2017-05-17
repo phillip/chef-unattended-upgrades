@@ -16,9 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-package "unattended-upgrades" do
-  action :install
+if node[:platform_family] == "debian"
+  apt_package "unattended-upgrades" do
+    action :upgrade
+    options '-o Dpkg::Options::="--force-confnew"'
+  end
+else
+  package "unattended-upgrades" do
+    action :upgrade
+  end
 end
 
 package "mailutils" do
@@ -45,7 +51,7 @@ execute "unattended-upgrade-periodic" do
   command "unattended-upgrade"
   ignore_failure true
   only_if do
-    File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
-    File.mtime('/var/lib/apt/periodic/update-success-stamp') > Time.now - node['unattended_upgrades']['max_seconds_after_aptget_update'].to_i
+    node['unattended_upgrades']['always_run_unattended_on_exec'] == true ||
+    node['unattended_upgrades']['unattended_upgrade_interval'].to_i > 0
   end
 end
