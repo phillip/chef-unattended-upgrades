@@ -49,7 +49,6 @@ end
 
 execute "unattended-upgrade-periodic" do
   command "unattended-upgrade"
-  ignore_failure true
   only_if do
     node['unattended_upgrades']['always_run_unattended_on_exec'] == true ||
     node['unattended_upgrades']['unattended_upgrade_interval'].to_i > 0
