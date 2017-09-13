@@ -62,3 +62,7 @@ Acquire::http::Dl-Limit "<%= @n[:download_limit] %>";
 <% else -%>
 //Acquire::http::Dl-Limit "70";
 <% end -%>
+
+Dpkg::Options {
+  "--force-confnew";
+};
